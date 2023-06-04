@@ -87,6 +87,14 @@
     </section>
   </main>
 
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "fbe95d99371548259a6da4028219398b"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+                          
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
@@ -102,6 +110,121 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    const consoleLogButton = errorBtns[0];
+
+    consoleLogButton.addEventListener('click', function() {
+      console.log('Console Log Demo');
+    });
+
+    const consoleErrorButton = errorBtns[1];
+
+    consoleErrorButton.addEventListener('click', function() {
+      try {
+        if (!globalVariable) {
+          throw new Error('Console Error Demo: variable globalVariable is undefined.');
+        }
+        alert(globalVariable);
+      } catch(err) {
+        console.error('Console Error Demo: variable globalVariable is undefined.');
+        TrackJS.track('Console Error Demo: variable globalVariable is undefined.');
+      }
+    });
+
+    let consoleCount = 0;
+    const consoleCountButton = errorBtns[2];
+
+    consoleCountButton.addEventListener('click', function() {
+      console.count('Console Count Demo');
+    });
+
+    const consoleWarnButton = errorBtns[3];
+
+    consoleWarnButton.addEventListener('click', function() {
+      console.warn("Console Warn Demo");
+    });
+
+    const consoleAssertButton = errorBtns[4];
+
+    consoleAssertButton.addEventListener('click', function() {
+      console.assert(3 < 2, '3 is not less than 2');
+    });
+
+    const consoleClearButton = errorBtns[5];
+
+    consoleClearButton.addEventListener('click', function() {
+      console.clear();
+    });
+
+    const consoleDirButton = errorBtns[6];
+
+    consoleDirButton.addEventListener('click', function() {
+      console.dir(consoleDirButton);
+    });
+
+    const consoleDirxmlButton = errorBtns[7];
+
+    consoleDirxmlButton.addEventListener('click', function() {
+      console.dirxml(consoleDirxmlButton);
+    });
+
+    const consoleGroupButton = errorBtns[8];
+
+    consoleGroupButton.addEventListener('click', function() {
+      console.group("Console Group Demo");
+    });
+
+    const consoleGroupEndButton = errorBtns[9];
+
+    consoleGroupEndButton.addEventListener('click', function() {
+      console.groupEnd("Console Group Demo");
+    });
+
+    const consoleTableButton = errorBtns[10];
+
+    consoleTableButton.addEventListener('click', function() {
+      const tableData = [{Book_Name: 'How to Master JS in One Day', Borrower_Name: 'Steve', Borrow_Date: '2023-5-12'}, 
+                         {Book_Name: '100 CSS Design Examples', Borrower_Name: 'Alice', Borrow_Date: '2023-6-7'}, 
+                         {Book_Name: 'Why HTML', Borrower_Name: 'Eve', Borrow_Date: '2023-5-20'}];
+      console.table(tableData);
+    });
+
+    const consoleTimerButton = errorBtns[11];
+
+    consoleTimerButton.addEventListener('click', function() {
+      console.time("Console Timer Demo");
+    });
+
+    const consoleTimerEndButton = errorBtns[12];
+
+    consoleTimerEndButton.addEventListener('click', function() {
+      console.timeEnd("Console Timer Demo");
+    });
+
+    const consoleTraceButton = errorBtns[13];
+
+    consoleTraceButton.addEventListener('click', function() {
+      const Level_1 = () => { Level_2(); };
+      const Level_2 = () => { Level_3(); };
+      const Level_3 = () => { Level_4(); };
+      const Level_4 = () => { console.trace(); };
+      Level_1();
+    });
+
+    consoleTimerButton.addEventListener('click', function() {
+      console.time("Console Timer Demo");
+    });
+
+    const globalErrorButton = errorBtns[14];
+
+    globalErrorButton.addEventListener('click', function() {
+      globalVariable += 1;
+    });
+
+    window.onerror = function () {
+      console.log('There is an error.');
+      return false;
+    };
+
   </script>
 </body>
 
